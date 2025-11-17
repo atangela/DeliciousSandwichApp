@@ -23,6 +23,6 @@ public enum DrinkSize {
 
     @Override
     public String toString() {
-        return displayName + " ($" + price + ")";
+        return String.format("%s ($%.2f)", displayName, price);
     }
 }
