@@ -29,12 +29,21 @@ public class Sandwich {
         return basePrice + toppingTotal;
     }
 
+    public List<Topping> getToppings() {
+        return new ArrayList<>(toppings);
+    }
+
     @Override
     public String toString() {
-        return String.format("%s\" %s sandwich%s with toppings: %s",
+        String formattedPrice = String.format("$%.2f", calculatePrice());
+
+        String breadName = breadType.getDisplayName();
+
+        return String.format("%s\" %s sandwich%s with toppings: %s. Total: %s",
                 size.getLength(),
-                breadType.name(),
+                breadName,
                 toasted ? " (toasted)" : "",
-                toppings.isEmpty() ? "none" : toppings);
+                toppings.isEmpty() ? "none" : toppings,
+                formattedPrice);
     }
 }

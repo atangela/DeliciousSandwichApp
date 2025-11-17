@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -7,15 +8,17 @@ import java.time.format.DateTimeFormatter;
 
 public class FileManager {
     public static void saveReceipt(Order order) {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-        String fileName = "receipts/" + timestamp + ".txt";
+        File folder = new File("receipts");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
 
-        try {
-            java.nio.file.Files.createDirectories(java.nio.file.Path.of("receipts"));
-            FileWriter writer = new FileWriter(fileName);
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        File receiptFile = new File(folder, timestamp + ".txt");
+
+        try (FileWriter writer = new FileWriter(receiptFile)) {
             writer.write(order.toString());
-            writer.close();
-            System.out.println("Receipt saved as " + fileName);
+            System.out.println("Receipt saved: " + receiptFile.getAbsolutePath());
         } catch (IOException ex) {
             System.out.println("Error saving receipt: " + ex.getMessage());
         }

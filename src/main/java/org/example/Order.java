@@ -12,11 +12,28 @@ public class Order {
     public void addDrink(Drink drink) { drinks.add(drink); }
     public void addChips(Chips chip) { chips.add(chip); }
 
+    public List<Sandwich> getSandwiches() {
+        return sandwiches;
+    }
+
+    public List<Drink> getDrinks() {
+        return drinks;
+    }
+
+    public List<Chips> getChips() {
+        return chips;
+    }
+
     public double calculateTotal() {
         double sandwichTotal = sandwiches.stream().mapToDouble(Sandwich::calculatePrice).sum();
         double drinkTotal = drinks.stream().mapToDouble(Drink::getPrice).sum();
         double chipsTotal = chips.stream().mapToDouble(Chips::getPrice).sum();
         return sandwichTotal + drinkTotal + chipsTotal;
+    }
+
+    public boolean isValid() {
+        if (!sandwiches.isEmpty()) return true;
+        return !drinks.isEmpty() || !chips.isEmpty();
     }
 
     @Override

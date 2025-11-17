@@ -18,6 +18,6 @@ public class Chips {
 
     @Override
     public String toString() {
-        return type + " chips - $" + price;
+        return String.format("Chips (%s) - $%.2f", type, price);
     }
 }

@@ -2,24 +2,22 @@ package org.example;
 
 public class Topping {
     protected String name;
-    protected double price;
     private ToppingType type;
     private boolean isExtra;
 
-    public Topping(String name, double price, ToppingType type, boolean isExtra) {
+    public Topping(String name, int i, ToppingType type, boolean isExtra) {
         this.name = name;
-        this.price = price;
+        //this.price = price;
         this.type = type;
         this.isExtra = isExtra;
     }
 
-    public Topping(String topping, double price) {
-    }
-
-    public Topping(String displayName, ToppingType toppingType, boolean extra) {
-    }
-
     public String getName() { return name; }
+
+    public ToppingType getType() { return type; }
+
+    public boolean isExtra() { return isExtra; }
+
     public double getPrice(SandwichSize size) {
         if (type == ToppingType.regular || type == ToppingType.sauce) return 0.0;
 
@@ -29,8 +27,7 @@ public class Topping {
                         case fourInch -> 0.50;
                         case eightInch -> 1.00;
                         case twelveInch -> 1.50;
-                    }
-                    :
+                    } :
                     switch (size) {
                         case fourInch -> 1.00;
                         case eightInch -> 2.00;
@@ -42,8 +39,7 @@ public class Topping {
                         case fourInch -> 0.30;
                         case eightInch -> 0.60;
                         case twelveInch -> 0.90;
-                    }
-                    :
+                    } :
                     switch (size) {
                         case fourInch -> 0.75;
                         case eightInch -> 1.50;
@@ -52,8 +48,6 @@ public class Topping {
             default -> 0.0;
         };
     }
-    public ToppingType getType() { return type; }
-    public boolean isExtra() { return isExtra; }
 
     @Override
     public String toString() {
